@@ -55,7 +55,7 @@ async function login() {
                 timer: 1500
             }).then(() => {
                 localStorage.setItem('userEmail', email);
-                localStorage.setItem('token', data.token);
+                localStorage.setItem('token', data.token);  // Almacenar el token en localStorage
                 if (rememberMe) {
                     localStorage.setItem('rememberMe', 'true');
                     localStorage.setItem('email', email);

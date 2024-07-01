@@ -1,5 +1,3 @@
-// assets/js/protected.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -21,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(data => {
         console.log('Acceso permitido:', data);
+        // Aquí puedes agregar lógica adicional para manejar los datos del usuario
     })
     .catch(error => {
         console.error('Error:', error);

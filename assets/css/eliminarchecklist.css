@@ -43,16 +43,25 @@ body.with-bg::after {
     border-left: 0;
 }
 
-.add-task-btn, .add-component-btn {
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-h2 {
+h2, h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
-.btn-primary, .btn-success {
+.btn-primary, .btn-danger {
     margin-right: 10px;
+}
+
+#spinner {
+    display: none; 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 9999;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
 }

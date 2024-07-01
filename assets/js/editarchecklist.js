@@ -1,6 +1,14 @@
 document.addEventListener("DOMContentLoaded", function() {
     const baseUrl = 'http://localhost:5000/api';
-    const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc2VybGl3dXF3emZqdHJkY2liIiwicm9sRSI6ImFub24iLCJpYXQiOjE3MTU2MjU3MjYsImV4cCI6MjAzMTIwMTcyNn0.h81cjxbMg7kWQ2Wv-YP3augY5_071Bpjfl57_jCXThQ';
+    const token = localStorage.getItem('token'); // Obtener el token del localStorage
+
+    function showSpinner() {
+        document.getElementById("spinner").style.display = "block";
+    }
+
+    function hideSpinner() {
+        document.getElementById("spinner").style.display = "none";
+    }
 
     async function searchMachine() {
         const codigoInterno = document.getElementById("codigoInterno").value.trim();
@@ -8,12 +16,13 @@ document.addEventListener("DOMContentLoaded", function() {
             showError("Por favor, ingresa un código interno.");
             return;
         }
+        showSpinner();
         try {
             const response = await fetch(`${baseUrl}/maquinas?codigo_interno=${codigoInterno}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'apikey': apiKey
+                    'Authorization': `Bearer ${token}`
                 }
             });
 
@@ -31,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'apikey': apiKey
+                    'Authorization': `Bearer ${token}`
                 }
             });
 
@@ -49,6 +58,8 @@ document.addEventListener("DOMContentLoaded", function() {
         } catch (error) {
             showError("Error al buscar la máquina.");
             console.error(error);
+        } finally {
+            hideSpinner();
         }
     }
 
@@ -87,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'apikey': apiKey
+                    'Authorization': `Bearer ${token}`
                 }
             });
 
@@ -134,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
             componentes: components
         };
 
+        showSpinner();
         try {
             const checklistId = await getChecklistId(codigoInterno);
 
@@ -141,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'apikey': apiKey
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(updatedChecklist)
             });
@@ -152,13 +164,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const result = await response.json();
             if (response.ok) {
-                alert("Checklist actualizado exitosamente.");
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: 'Checklist actualizado exitosamente.',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.href = '../pages/home.html';
+                });
             } else {
                 showError(result.error || "Error al actualizar el checklist.");
             }
         } catch (error) {
             showError("Error al actualizar el checklist.");
             console.error(error);
+        } finally {
+            hideSpinner();
         }
     }
 

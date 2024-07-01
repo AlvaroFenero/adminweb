@@ -1,19 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+/* Global styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    background: none;
+}
+
+body.with-bg::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/Wallpaper-Maquinas.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    z-index: -1;
+}
+
+body.with-bg::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    z-index: -1;
+}
+
+.card {
+    max-width: 800px;
+    width: 100%;
+}
+
 /* Card custom styles */
 .card-custom {
     display: flex;
+    flex-direction: column;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     background-color: white;
-    margin: 20px 0;
-    width: 100%; /* Establecemos el ancho de las tarjetas */
-    max-width: 400px; /* Establecemos el ancho máximo de las tarjetas */
+    margin: 10px 0;
     transition: transform 0.3s;
-    position: relative; /* Añadimos posición relativa para el contenedor de la tarjeta */
+    position: relative;
+    height: 100%;
 }
 
 .card-left, .card-right {
-    padding: 20px;
+    padding: 15px;
     flex: 1;
 }
 
@@ -27,36 +64,36 @@
 }
 
 .card-left h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
 }
 
 .card-left img {
-    width: 100px; /* Aumentamos el tamaño del logo */
-    height: 100px; /* Aumentamos el tamaño del logo */
+    width: 75px;
+    height: 75px;
 }
 
 .card-right h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
 }
 
 .btn-custom {
-    background: #f97316; /* Color naranja */
+    background: #f97316;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     border-radius: 25px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     transition: background 0.3s;
-    position: absolute; /* Añadimos posición absoluta al botón */
-    bottom: 20px; /* Ajustamos la posición desde abajo */
-    right: 20px; /* Ajustamos la posición desde la derecha */
-    text-decoration: none; /* Quitamos el subrayado */
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    text-decoration: none;
 }
 
 .btn-custom:hover {
-    background: #ea580c; /* Color naranja más oscuro */
+    background: #ea580c;
 }
 
 /* Additional styles for hover effects */
